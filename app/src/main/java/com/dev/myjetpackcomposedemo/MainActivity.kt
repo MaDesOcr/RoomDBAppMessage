@@ -111,6 +111,7 @@ fun Messages() {
 
 @Composable
 fun Card(messageData: MessageData) {
+    val vm: MessageViewModel = viewModel()
     Box(modifier = Modifier.background(color = Color.Gray)) {
         Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             Image(
@@ -127,6 +128,10 @@ fun Card(messageData: MessageData) {
                 Text(text = messageData.pseudo, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(text = messageData.contenuMessage)
+
+                Button(onClick = {vm.delete(messageData.id)}) {
+                    Text(text="Delete")
+                }
             }
         }
     }

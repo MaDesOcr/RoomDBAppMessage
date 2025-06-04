@@ -17,6 +17,10 @@ class MessageRepository(private val dao: MessageDao) {
     suspend fun insertMessage(message: MessageData) {
         dao.insert(message)
     }
+
+    suspend fun deleteMessage(id : Int){
+        dao.delete(id)
+    }
 }
 
 // Database singleton
@@ -60,5 +64,17 @@ class MessageViewModel(app: Application) : AndroidViewModel(app) {
                 e.printStackTrace()
             }
         }
+    }
+
+    fun delete(idMessageToDelete : Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.deleteMessage(idMessageToDelete)
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+
     }
 }

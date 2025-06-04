@@ -12,4 +12,7 @@ interface MessageDao {
 
     @Insert
     suspend fun insert(msg: MessageData)
+
+    @Query("DELETE FROM messages WHERE id = :id")
+    suspend fun delete(id : Int)
 }
